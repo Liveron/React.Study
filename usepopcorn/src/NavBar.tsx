@@ -1,18 +1,18 @@
+import { ReactNode } from "react";
 import Logo from "./Logo";
 import NumResults from "./NumResults";
 import Search from "./Search";
 import MovieModel from "./models/MovieModel";
 
-export type NavBarProps = {
-  movies?: MovieModel[];
+type NavBarProps = {
+  children: ReactNode;
 };
 
-export default function NavBar({ movies = [] }: NavBarProps) {
+export default function NavBar({ children }: NavBarProps) {
   return (
     <nav className="nav-bar">
       <Logo />
-      <Search />
-      <NumResults movies={movies} />
+      {children}
     </nav>
   );
 }

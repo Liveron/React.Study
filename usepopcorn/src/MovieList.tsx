@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { tempMovieData } from "./data/MoviesData";
 import Movie from "./Movie";
+import MovieModel from "./models/MovieModel";
 
-export default function MovieList() {
-  const [movies, setMovies] = useState(tempMovieData);
+type MovieListProps = {
+  movies: MovieModel[];
+};
 
+export default function MovieList({ movies }: MovieListProps) {
   return (
     <ul className="list">
       {movies?.map((movie) => (

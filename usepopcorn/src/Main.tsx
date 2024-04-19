@@ -1,11 +1,9 @@
-import ListBox from "./ListBox";
-import WatchedBox from "./WatchedBox";
+import { ReactNode } from "react";
 
-export default function Main() {
-  return (
-    <main className="main">
-      <ListBox />
-      <WatchedBox />
-    </main>
-  );
+type MainProps = {
+  children: ReactNode;
+};
+
+export default function Main({ children }: MainProps) {
+  return <main className="main">{children}</main>;
 }
