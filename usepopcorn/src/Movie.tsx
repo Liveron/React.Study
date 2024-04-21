@@ -2,11 +2,12 @@ import MovieModel from "./models/MovieModel";
 
 type MovieProps = {
   movie: MovieModel;
+  onSelect: (id: string) => void;
 };
 
-export default function Movie({ movie }: MovieProps) {
+export default function Movie({ movie, onSelect }: MovieProps) {
   return (
-    <li key={movie.imdbID}>
+    <li onClick={() => onSelect(movie.imdbID)}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>

@@ -47,3 +47,7 @@ export const tempWatchedData = [
 
 export const average = (arr: number[]) =>
   arr.reduce((acc, cur, _, arr) => acc + cur / arr.length, 0);
+
+export const KEY = "bdf2cd37";
+
+export const API = `http://www.omdbapi.com/?apikey=${KEY}`;
