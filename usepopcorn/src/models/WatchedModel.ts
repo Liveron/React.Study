@@ -6,4 +6,5 @@ export default class WatchedModel {
   runtime = 0;
   imdbRating = 0;
   userRating = 0;
+  countRatingDecisions = 0;
 }

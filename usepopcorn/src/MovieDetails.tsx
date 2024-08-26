@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { API } from "./data/MoviesData";
 import MovieDetailsModel from "./models/MovieDetailsModel";
 import StarRating from "./StarRating/StarRating";
 import Loader from "./Loader";
 import WatchedModel from "./models/WatchedModel";
+import useKey from "./hooks/useKey";
 
 type MovieDetailsProps = {
   selectedId: string;
@@ -21,6 +22,12 @@ export default function MovieDetails({
   const [movie, setMovie] = useState(new MovieDetailsModel());
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
+
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (userRating) countRef.current++;
+  }, [userRating]);
 
   const thisWatched = watched.find((movie) => movie.imdbID === selectedId);
 
@@ -50,6 +57,16 @@ export default function MovieDetails({
     getMovieDetails();
   }, [selectedId]);
 
+  useEffect(() => {
+    if (title) document.title = `Movie | ${title}`;
+
+    return () => {
+      document.title = "usePopcorn";
+    };
+  }, [title]);
+
+  useKey("Escape", onCloseMovie);
+
   function handleAdd() {
     const newWatchedMovie: WatchedModel = {
       imdbID: selectedId,
@@ -59,6 +76,7 @@ export default function MovieDetails({
       Title: title,
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      countRatingDecisions: countRef.current,
     };
 
     onAddWatched(newWatchedMovie);
