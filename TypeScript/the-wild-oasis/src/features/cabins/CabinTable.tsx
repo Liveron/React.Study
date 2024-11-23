@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { getCabins } from "../../services/apiCabins";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
-import { CabinModel } from "../../model/CabinModel";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);

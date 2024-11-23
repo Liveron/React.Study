@@ -13,6 +13,8 @@ export async function getCabins(): Promise<CabinModel[]> {
 }
 
 export async function createEditCabin(cabin: CabinModel, id: number) {
+  console.log(cabin, id);
+
   const { image } = cabin;
   const hasImagePath =
     typeof image === "string" && String(image).startsWith(supabaseUrl);

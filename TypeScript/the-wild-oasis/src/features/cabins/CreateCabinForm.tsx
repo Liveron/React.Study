@@ -60,16 +60,19 @@ function CreateCabinForm({ cabinToEdit }: Props) {
     onError: (err) => toast.error(err.message),
   });
 
-  function onSubmit(data: FieldValues) {
-    if (isEditSession) editCabin();
-
-    createCabin({
-      cabin: { ...data, image: data.image[0] } as CabinModel,
-      id: editId,
-    });
-  }
-
   const isWorking = isCreating || isEditing;
+
+  function onSubmit(data: FieldValues) {
+    const image = typeof data.image == "string" ? data.image : data.image[0];
+
+    if (isEditSession)
+      editCabin({ cabin: { ...(data as CabinModel), image }, id: editId });
+    else
+      createCabin({
+        cabin: { ...data, image: image } as CabinModel,
+        id: editId,
+      });
+  }
 
   function onError(errors: FieldValues) {}
 
